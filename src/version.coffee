@@ -1,6 +1,7 @@
 verifyChanges = require('./steps/verify-changes')
 readPackage = require('./steps/read-package')
 syncVersion = require('./steps/sync-version')
+commitChanges = require('./steps/commit-changes')
 closeStdin = require('./steps/close-stdin')
 
 module.exports = (argv) ->
@@ -18,7 +19,12 @@ module.exports = (argv) ->
     )
   )
   .then(() ->
-    syncVersion(pkg.version, argv.ignoreBower)
+    if not argv.dontSync
+      syncVersion(pkg.version, argv.ignoreBower)
+  )
+  .then(() ->
+    if not argv.dontCommitVersionChanges
+      commitChanges(pkg.version, argv.ignoreBower)
   )
   .catch((err) ->
     console.log(err)

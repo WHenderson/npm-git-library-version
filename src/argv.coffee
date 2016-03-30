@@ -77,6 +77,18 @@ argv = require('yargs')
       description: 'Do not syncronise/add bower.json'
       type: 'boolean'
     })
+    .options('dont-sync', {
+      demand: false
+      default: false
+      description: 'Do not syncronise version across package files'
+      type: 'boolean'
+    })
+    .options('dont-commit-version', {
+      demand: false
+      default: false
+      description: 'Do not commit version changes'
+      type: 'boolean'
+    })
     .options('dont-push', {
       demand: false
       default: false
