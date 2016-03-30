@@ -65,7 +65,7 @@ argv = require('yargs')
       describe: 'Set the expected branch name'
       type: 'string'
     })
-    .option('ignore-unexpected-changes', {
+    .option('ignore-changes', {
       demand: false
       default: false
       description: 'Ignore any unexpected file changes'

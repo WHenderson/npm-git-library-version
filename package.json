@@ -4,6 +4,7 @@
   "description": "Script for validating, versioning and tagging an npm release",
   "main": "dist/index.js",
   "dependencies": {
+    "colors": "^1.1.2",
     "yargs": "^4.3.2"
   },
   "devDependencies": {
