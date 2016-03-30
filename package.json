@@ -1,0 +1,43 @@
+{
+  "name": "npm-git-library-version",
+  "version": "1.0.0",
+  "description": "Script for validating, versioning and tagging an npm release",
+  "main": "dist/index.js",
+  "dependencies": {
+    "yargs": "^4.3.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coffee-coverage": "^1.0.1",
+    "coffee-script": "^1.10.0",
+    "gulp": "^4.0.0-alpha.2",
+    "gulp-cli": "^1.2.1",
+    "gulp-coffee": "^2.3.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-spawn-mocha": "^2.2.2",
+    "gulp-util": "^3.0.7"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WHenderson/npm-git-library-version.git"
+  },
+  "keywords": [
+    "npm",
+    "git",
+    "tag",
+    "version",
+    "preversion",
+    "bower"
+  ],
+  "author": "Will Henderson <whenderson.github@gmail.com> (https://github.com/WHenderson)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/WHenderson/npm-git-library-version/issues"
+  },
+  "homepage": "https://github.com/WHenderson/npm-git-library-version#readme"
+}
