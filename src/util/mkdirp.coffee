@@ -1,8 +1,9 @@
 mkdirp = require('mkdirp')
 
-module.exports = (arguments) ->
+module.exports = () ->
+  args = arguments
   new Promise((resolve, reject) ->
-    mkdirp(arguments..., (err) ->
+    mkdirp(args..., (err) ->
       if err?
         return reject(err)
 

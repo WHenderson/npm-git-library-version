@@ -1,8 +1,9 @@
 rimraf = require('rimraf')
 
-module.exports = (arguments) ->
+module.exports = () ->
+  args = arguments
   new Promise((resolve, reject) ->
-    rimraf(arguments..., (err) ->
+    rimraf(args..., (err) ->
       if err?
         return reject(err)
 

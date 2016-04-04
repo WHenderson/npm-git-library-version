@@ -8,6 +8,6 @@ suite('basic', () ->
   )
 
   test('vanilla', () ->
-    
+    mkdirp('test/pkgs/vanilla')
   )
 )
