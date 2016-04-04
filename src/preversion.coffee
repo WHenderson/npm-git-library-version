@@ -12,7 +12,13 @@ module.exports = (argv) ->
     if not argv.ignoreDirty
       verifyClean()
   )
-  .catch((err) ->
-    console.log(err)
-  )
   .then(closeStdin, closeStdin)
+  .then(
+    () ->
+      process.exit(0)
+
+    (err) ->
+      console.error('Operation failed.')
+      console.error(err)
+      process.exit(-1)
+  )

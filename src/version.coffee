@@ -3,6 +3,8 @@ readPackage = require('./steps/read-package')
 syncVersion = require('./steps/sync-version')
 commitChanges = require('./steps/commit-changes')
 closeStdin = require('./steps/close-stdin')
+revertCommit = require('./steps/revert-commit')
+reset = require('./steps/reset')
 
 module.exports = (argv) ->
   pkg = null
@@ -19,14 +21,38 @@ module.exports = (argv) ->
     )
   )
   .then(() ->
-    if not argv.dontSync
-      syncVersion(pkg.version, argv.ignoreBower)
-  )
-  .then(() ->
-    if not argv.dontCommitVersionChanges
-      commitChanges(pkg.version, argv.ignoreBower)
+    Promise.resolve()
+    .then(() ->
+      if not argv.dontSync
+        syncVersion(pkg.version, argv.ignoreBower)
+    )
+    .then(() ->
+      if not argv.dontCommitVersionChanges
+        commitChanges(pkg.version, argv.ignoreBower)
+    )
+    .catch((err) ->
+      if not argv.dontCommitVersionChanges
+        revertCommit()
+        .then(() ->
+          throw err
+        )
+      else
+        throw err
+    )
   )
   .catch((err) ->
-    console.log(err)
+    reset()
+    .then(() ->
+      throw err
+    )
   )
   .then(closeStdin, closeStdin)
+  .then(
+    () ->
+      process.exit(0)
+
+    (err) ->
+      console.error('Operation failed.')
+      console.error(err)
+      process.exit(-1)
+  )
