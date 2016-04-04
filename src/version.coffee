@@ -5,6 +5,8 @@ commitChanges = require('./steps/commit-changes')
 closeStdin = require('./steps/close-stdin')
 revertCommit = require('./steps/revert-commit')
 reset = require('./steps/reset')
+detach = require('./steps/detach')
+reattach = require('./steps/reattach')
 
 module.exports = (argv) ->
   pkg = null
@@ -29,6 +31,21 @@ module.exports = (argv) ->
     .then(() ->
       if not argv.dontCommitVersionChanges
         commitChanges(pkg.version, argv.ignoreBower)
+    )
+    .then(() ->
+      Promise.resolve()
+      .then(() ->
+        detach()
+      )
+      .then(
+        () ->
+          reattach()
+        (err) ->
+          reattach()
+          .then((err) ->
+            throw err
+          )
+      )
     )
     .catch((err) ->
       if not argv.dontCommitVersionChanges
