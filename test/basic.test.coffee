@@ -1,5 +1,13 @@
+exec = require('../src/util/exec')
+rimraf = require('../src/util/rimraf')
+mkdirp = require('../src/util/mkdirp')
+
 suite('basic', () ->
-  suiteSetup((cb) ->
-    return cb()
+  suiteSetup(() ->
+    rimraf('test/pkgs')
+  )
+
+  test('vanilla', () ->
+    
   )
 )
