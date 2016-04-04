@@ -39,9 +39,9 @@ module.exports = (argv) ->
       )
       .then(
         () ->
-          reattach()
+          reattach(argv.branch)
         (err) ->
-          reattach()
+          reattach(argv.branch)
           .then((err) ->
             throw err
           )

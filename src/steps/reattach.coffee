@@ -1,4 +1,4 @@
 exec = require('../util/exec')
 
-module.exports = () ->
-  exec('git checkout master')
+module.exports = (branch) ->
+  exec("git checkout #{branch}")
