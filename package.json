@@ -30,7 +30,7 @@
   },
   "scripts": {
     "preversion": "node --require coffee-script/register src/cli.coffee preversion",
-    "version": "node --require coffee-script/register src/cli.coffee version",
+    "version": "node --require coffee-script/register src/cli.coffee version dist",
     "build": "gulp chained-1-build",
     "test": "gulp"
   },
