@@ -1,9 +1,24 @@
 argv = require('./argv')
+closeStdin = require('./steps/close-stdin')
 
-switch argv._[0]
+action = switch argv._[0]
   when 'preversion'
-    require('./preversion')(argv)
+    require('./preversion')
   when 'version'
-    require('./version')(argv)
+    require('./version')
   when 'postversion'
-    require('./postversion')(argv)
+    require('./postversion')
+
+action(argv)
+.then(closeStdin, closeStdin)
+.then(
+  () ->
+    process.exit(0)
+
+  (err) ->
+    console.error('Operation failed.')
+    console.error(err)
+    console.error(err.stack)
+    process.exit(-1)
+)
+

@@ -2,7 +2,6 @@ verifyChanges = require('./steps/verify-changes')
 readPackage = require('./steps/read-package')
 syncVersion = require('./steps/sync-version')
 commitChanges = require('./steps/commit-changes')
-closeStdin = require('./steps/close-stdin')
 revertCommit = require('./steps/revert-commit')
 reset = require('./steps/reset')
 detach = require('./steps/detach')
@@ -96,14 +95,4 @@ module.exports = (argv) ->
     .then(() ->
       throw err
     )
-  )
-  .then(closeStdin, closeStdin)
-  .then(
-    () ->
-      process.exit(0)
-
-    (err) ->
-      console.error('Operation failed.')
-      console.error(err)
-      process.exit(-1)
   )

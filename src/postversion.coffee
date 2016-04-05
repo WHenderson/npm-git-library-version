@@ -1,6 +1,5 @@
 verifyBranch = require('./steps/verify-branch')
 verifyClean = require('./steps/verify-clean')
-closeStdin = require('./steps/close-stdin')
 reattach = require('./steps/reattach')
 exec = require('./util/exec')
 
@@ -51,14 +50,4 @@ module.exports = (argv) ->
           )
       )
     )
-  )
-  .then(closeStdin, closeStdin)
-  .then(
-    () ->
-      process.exit(0)
-
-    (err) ->
-      console.error('Operation failed.')
-      console.error(err)
-      process.exit(-1)
   )

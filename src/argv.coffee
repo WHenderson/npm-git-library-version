@@ -164,5 +164,3 @@ module.exports = do ->
     argv.files = argv._.slice(1)
 
   return argv
-
-console.log('argv:', module.exports)
