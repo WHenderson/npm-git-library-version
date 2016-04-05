@@ -2,7 +2,11 @@
   "name": "npm-git-library-version",
   "version": "1.0.0",
   "description": "Script for validating, versioning and tagging an npm release",
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
+  "bin": "dist/cli.js",
   "dependencies": {
     "colors": "^1.1.2",
     "yargs": "^4.3.2"
@@ -14,13 +18,15 @@
     "gulp": "^4.0.0-alpha.2",
     "gulp-cli": "^1.2.1",
     "gulp-coffee": "^2.3.1",
+    "gulp-if": "^2.0.0",
+    "gulp-insert": "^0.5.0",
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-spawn-mocha": "^2.2.2",
     "gulp-util": "^3.0.7",
-    "rimraf": "^2.5.2",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.2"
   },
   "scripts": {
     "test": "gulp"

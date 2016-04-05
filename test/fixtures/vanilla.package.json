@@ -4,8 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preversion": "npm-git-library-version preversion",
+    "version": "npm-git-library-version version dist",
+    "build": "(mkdir dist || exit 0) && echo a > dist/a.txt && echo b > dist/b.txt && echo cruft > cruft.txt",
+    "test": "echo \"Pass testing\" && exit 0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "npm-git-library-version": "file:..\\..\\.."
+  }
 }

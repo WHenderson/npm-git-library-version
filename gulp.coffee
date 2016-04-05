@@ -4,6 +4,8 @@ g =
   coffee: require('gulp-coffee')
   mocha: require('gulp-spawn-mocha')
   util: require('gulp-util')
+  insert: require('gulp-insert')
+  if: require('gulp-if') 
 
 tasks =
   clean: () ->
@@ -15,6 +17,7 @@ tasks =
     gulp
     .src('src/**/*.coffee')
     .pipe(g.coffee({ bare: true }))
+    .pipe(g.if('cli.js', g.insert.prepend('#!/usr/bin/env node\n')))
     .pipe(gulp.dest('dist'))
 
   test: () ->

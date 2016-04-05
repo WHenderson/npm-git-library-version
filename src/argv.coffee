@@ -8,8 +8,8 @@ argv = require('yargs')
     .epilog('''
       Does the following:
 
-      1. Verifies head is <branch>
-      2. Verifies working folder is not dirty
+      * Verifies head is <branch>
+      * Verifies working folder is not dirty
 
       Exit code is non-zero on error.
     ''')
@@ -43,16 +43,18 @@ argv = require('yargs')
     .epilog('''
       Does the following:
 
-      1. Verify expected (and only expected) files have been modified
-      2. Syncronise package files
-      3. Add package files
-      4. Commit changes
-      5. Add distribution files
-      6. Commit distribution files
-      7. Tag as a versioned release
-      8. Publish
-      9. Revert to original branch
-      10. Push to origin with tags
+      * Verify expected (and only expected) files have been modified
+      * Syncronise package files
+      * Add package files
+      * Commit changes
+      * Build (npm run-script build)
+      * Test (npm test)
+      * Add distribution files
+      * Commit distribution files
+      * Tag as a versioned release
+      * Publish
+      * Revert to original branch
+      * Push to origin with tags
 
       Exit code is non-zero on error.
 
