@@ -1,0 +1,16 @@
+{
+  "name": "pkg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preversion": "node --require coffee-script/register ../../../src/cli.coffee preversion",
+    "version": "node --require coffee-script/register ../../../src/cli.coffee version dist",
+    "build": "(mkdir dist || exit 0) && echo a > dist/a.txt && echo b > dist/b.txt && echo cruft > cruft.txt",
+    "test": "echo \"Pass testing\" && exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  }
+}

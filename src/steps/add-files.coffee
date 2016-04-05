@@ -1,6 +1,7 @@
 exec = require('../util/exec')
 
 module.exports = (files) ->
+  console.log('add files:', files)
   add = Promise.resolve()
 
   if files?
