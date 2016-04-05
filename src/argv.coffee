@@ -2,7 +2,7 @@ argv = require('yargs')
 .usage('Usage: $0 <command> [options]')
 .command(
   'preversion',
-  'To be run as part of your npm preversion script.',
+  'To be run as part of your npm preversion script',
   (yargs) ->
     yargs
     .epilog('''
@@ -41,13 +41,16 @@ argv = require('yargs')
     yargs
     .usage('Usage: $0 version [options] [files...]')
     .epilog('''
+      Notes:
+        [files...] defaults to those provided in package.json
+
       Does the following:
 
       * Verify expected (and only expected) files have been modified
       * Syncronise package files
       * Add package files
       * Commit changes
-      * Build (npm run-script build)
+      * Build (npm run-script build), if required
       * Test (npm test)
       * Add distribution files
       * Commit distribution files

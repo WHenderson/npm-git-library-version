@@ -7,6 +7,7 @@ revertCommit = require('./steps/revert-commit')
 reset = require('./steps/reset')
 detach = require('./steps/detach')
 reattach = require('./steps/reattach')
+addFiles = require('./steps/add-files')
 exec = require('./util/exec')
 
 module.exports = (argv) ->
@@ -18,9 +19,12 @@ module.exports = (argv) ->
       verifyChanges(argv.ignoreBower)
   )
   .then(() ->
-    readPackage(argv.ignoreBower)
+    readPackage()
     .then((json) ->
       pkg = json
+
+      if argv.files.length == 0 and pkg.files?
+        argv.files = pkg.files.slice()
     )
   )
   .then(() ->
@@ -41,22 +45,24 @@ module.exports = (argv) ->
       .then(() ->
         Promise.resolve()
         .then(() ->
-          exec('npm run-script build')
-        )
-        .then(() ->
-          add = Promise.resolve()
-          for fileName in argv.files
-            do (fileName) ->
-              add = add.then(() ->
-                exec("git add -f #{fileName}")
-              )
-          return add
-        )
-        .then(() ->
-          exec('git clean -fd')
+          if pkg.scripts.build?
+            exec('npm run-script build')
+            .then(() ->
+              addFiles(argv.files)
+            )
+            .then(() ->
+              exec('git clean -fd')
+            )
         )
         .then(() ->
           exec('npm test')
+        )
+        .then(() ->
+          if not pkg.scripts.build?
+            addFiles(argv.files)
+            .then(() ->
+              exec('git clean -fd')
+            )
         )
         .then(() ->
           exec('git commit -m "distribution files"')
