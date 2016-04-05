@@ -5,3 +5,5 @@ switch argv._[0]
     require('./preversion')(argv)
   when 'version'
     require('./version')(argv)
+  when 'postversion'
+    require('./postversion')(argv)

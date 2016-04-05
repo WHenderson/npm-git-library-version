@@ -99,6 +99,58 @@ argv = require('yargs')
     })
     .help('h')
 )
+.command(
+  'postversion',
+  'To be run as part of your npm postversion script',
+  (yargs) ->
+    yargs
+    .usage('Usage: $0 postversion [options]')
+    .epilog('''
+      Does the following:
+
+      * Verifies head is <branch>
+      * Verifies working folder is not dirty
+      * Checkout version tag
+      * git push
+      * git push --tags
+      * npm publish
+      * Revert to branch
+
+      Exit code is non-zero on error.
+    ''')
+    .option('b', {
+      alias: 'branch'
+      demand: false
+      default: 'master'
+      describe: 'Set the expected branch name'
+      type: 'string'
+    })
+    .option('ignore-branch', {
+      demand: false
+      default: false
+      describe: 'Skip branch name verification'
+      type: 'boolean'
+    })
+    .option('ignore-dirty', {
+      demand: false
+      default: false
+      describe: 'Skip clean working folder verification'
+      type: 'boolean'
+    })
+    .option('no-git-push', {
+      demand: false
+      default: false
+      describe: 'Do not push changes'
+      type: 'boolean'
+    })
+    .option('no-npm-publish', {
+      demand: false
+      default: false
+      describe: 'Do not publish to npm'
+      type: 'boolean'
+    })
+    .help('h')
+)
 .demand(1)
 .strict()
 .help('h')
