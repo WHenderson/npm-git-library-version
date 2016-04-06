@@ -1,3 +1,4 @@
+readPackage = require('./steps/read-package')
 verifyBranch = require('./steps/verify-branch')
 verifyClean = require('./steps/verify-clean')
 reattach = require('./steps/reattach')
