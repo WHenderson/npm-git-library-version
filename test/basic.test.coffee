@@ -5,6 +5,7 @@ chdir = require('../src/util/chdir')
 copy = require('../src/util/copy')
 path = require('path')
 assert = require('chai').assert
+fs = require('fs')
 
 suite('basic', () ->
   @timeout(0)
@@ -57,7 +58,7 @@ suite('basic', () ->
       .then((out) ->
         assert.equal(
           out,
-                    '''
+          '''
           On branch master
           nothing to commit, working directory clean
 
@@ -68,7 +69,7 @@ suite('basic', () ->
       .then((out) ->
         assert.equal(
           out,
-                    '''
+          '''
           .gitignore
           .npmrc
           package.json
@@ -107,6 +108,7 @@ suite('basic', () ->
 
   suite('coverage', () ->
     test('scafolding', () ->
+
       mkdirp(path.join(__dirname, 'pkgs/coverage'))
       .then -> chdir(path.join(__dirname, 'pkgs/coverage'))
       .then -> exec('git init')
@@ -144,7 +146,28 @@ suite('basic', () ->
     )
 
     test('version bump', () ->
-      exec('npm version major')
+
+      closeStdin = require('../src/steps/close-stdin')
+      readPackage = require('../src/steps/read-package')
+      argv = require('../src/argv')
+      actions =
+        preversion : require('../src/preversion')
+        version : require('../src/version')
+
+      Promise.resolve()
+      .then(() ->
+        actions.preversion(argv.parse('preversion'))
+      )
+      .then(() ->
+        readPackage()
+      )
+      .then((json) ->
+        json.version = '2.0.0'
+        fs.writeFileSync('package.json', JSON.stringify(json, null, 2))
+      )
+      .then(() ->
+        actions.version(argv.parse('version dist'))
+      )
       .then -> exec('git status')
       .then((out) ->
         assert.equal(
