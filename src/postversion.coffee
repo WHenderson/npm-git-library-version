@@ -31,11 +31,11 @@ module.exports = (argv) ->
       Promise.resolve()
       .then(() ->
         if not argv.noGitPush
-          exec('git push')
+          exec("git push origin HEAD:#{argv.branch}")
       )
       .then(() ->
         if not argv.noGitPush
-          exec('git push --tags')
+          exec("git push origin HEAD:#{argv.branch} --tags")
       )
       .then(() ->
         if not argv.noNpmPublish
