@@ -23,20 +23,31 @@ module.exports = (argv) ->
     )
   )
   .then(() ->
+    exec("git tag -l #{pkg.version}")
+    .then((out) ->
+      if not out.split(/\r\n|\n/).some((line) -> line.trim() == "v#{pkg.version}")
+        throw new Error("Cannot find tag: v#{pkg.version}")
+      return
+    )
+  )
+  .then(() ->
+    Promise.resolve()
+    .then(() ->
+      if not argv.noGitPush
+        exec("git push origin HEAD:#{argv.branch}")
+    )
+    .then(() ->
+      if not argv.noGitPush
+        exec("git push origin HEAD:#{argv.branch} --tags")
+    )
+  )
+  .then(() ->
     Promise.resolve()
     .then(() ->
       exec("git checkout v#{pkg.version}")
     )
     .then(() ->
       Promise.resolve()
-      .then(() ->
-        if not argv.noGitPush
-          exec("git push origin HEAD:#{argv.branch}")
-      )
-      .then(() ->
-        if not argv.noGitPush
-          exec("git push origin HEAD:#{argv.branch} --tags")
-      )
       .then(() ->
         if not argv.noNpmPublish
           exec('npm publish')
