@@ -11,6 +11,7 @@ exec = require('./util/exec')
 
 module.exports = (argv) ->
   pkg = null
+  argv.files = argv._.slice(1)
 
   Promise.resolve()
   .then(() ->

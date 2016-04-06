@@ -1,4 +1,4 @@
-argv = require('yargs')
+module.exports = require('yargs')
 .usage('Usage: $0 <command> [options]')
 .command(
   'preversion',
@@ -157,10 +157,3 @@ argv = require('yargs')
 .demand(1)
 .strict()
 .help('h')
-.argv
-
-module.exports = do ->
-  if argv._[0] == 'version'
-    argv.files = argv._.slice(1)
-
-  return argv

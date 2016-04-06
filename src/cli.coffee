@@ -1,4 +1,4 @@
-argv = require('./argv')
+argv = require('./argv').argv
 closeStdin = require('./steps/close-stdin')
 
 action = switch argv._[0]
