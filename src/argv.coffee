@@ -113,9 +113,9 @@ module.exports = require('yargs')
 
       * Verifies head is <branch>
       * Verifies working folder is not dirty
+      * Verifies current version is tagged
+      * git push / git push --tags
       * Checkout version tag
-      * git push
-      * git push --tags
       * npm publish
       * Revert to branch
 
