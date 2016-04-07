@@ -10,8 +10,8 @@ npm install --save-dev npm-git-library-version
 ```
 
 ## Usage
-Place the following commands into your package.json
 
+1. Place the following commands into your package.json
 ```json
 {
   "files": [
@@ -25,6 +25,11 @@ Place the following commands into your package.json
     "test": "echo \"Required testing script. If no build script is provided, this is expected to build the package before testing\" && exit 0"
   }
 }
+```
+
+2. Ensure you have a `.npmrc` file alongside your package .json with the following content
+```
+git-tag-version=false
 ```
 
 ##  Commandline
