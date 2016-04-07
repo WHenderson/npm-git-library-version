@@ -23,7 +23,7 @@ module.exports = (argv) ->
     )
   )
   .then(() ->
-    exec("git tag -l #{pkg.version}")
+    exec("git tag -l v#{pkg.version}")
     .then((out) ->
       if not out.split(/\r\n|\n/).some((line) -> line.trim() == "v#{pkg.version}")
         throw new Error("Cannot find tag: v#{pkg.version}")
