@@ -1,6 +1,6 @@
 {
   "name": "npm-git-library-version",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Script for validating, versioning and tagging an npm release",
   "files": [
     "dist"
