@@ -2,9 +2,13 @@ module.exports = require('yargs')
 .usage('Usage: $0 <command> [options]')
 .command(
   'preversion',
-  'To be run as part of your npm preversion script',
+  '''
+  To be run as part of your npm preversion script.
+  Verifies git is on the master branch and is clean
+  ''',
   (yargs) ->
     yargs
+    .usage('Usage: $0 preversion [options]')
     .epilog('''
       Does the following:
 
@@ -36,7 +40,10 @@ module.exports = require('yargs')
 )
 .command(
   'version',
-  'To be run as part of your npm version script',
+  '''
+  To be run as part of your npm version script.
+  Builds, Validates, Commits and Tags the package.
+  ''',
   (yargs) ->
     yargs
     .usage('Usage: $0 version [options] [files...]')
@@ -104,7 +111,10 @@ module.exports = require('yargs')
 )
 .command(
   'postversion',
-  'To be run as part of your npm postversion script',
+  '''
+  To be run as part of your npm postversion script.
+  Verifies git state and structure then pushes changes and publishes to npm.
+  ''',
   (yargs) ->
     yargs
     .usage('Usage: $0 postversion [options]')
